@@ -48,6 +48,8 @@ for user in many_user:
 
 
 ###########################################################
+# items로 풀어보기
+
 
 def rental_book(info):
 
@@ -61,5 +63,6 @@ def rental_book(info):
 
     pass
 
-for user in many_user:
+for user in user_info.items():
     rental_book(user)
+
