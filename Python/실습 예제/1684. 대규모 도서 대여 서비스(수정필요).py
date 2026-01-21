@@ -51,11 +51,9 @@ for user in many_user:
 # items로 풀어보기
 
 
-def rental_book(info):
+def rental_book(user_info):
 
-    name = info['name']
-    age = info['age']
-    
+    for name, age in user_info.items():
     rented = age // 10
     decrease_book(rented)
 
@@ -63,6 +61,6 @@ def rental_book(info):
 
     pass
 
-for user in user_info.items():
+for user in user_info:
     rental_book(user)
 
