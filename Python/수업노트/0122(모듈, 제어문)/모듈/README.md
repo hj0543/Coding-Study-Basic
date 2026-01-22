@@ -119,6 +119,7 @@ print(tools.mod(1, 2))
 * requests 외부 패키지 : 파이썬에서 웹에 요청을 보내고 응답을 받는 걸 아주 쉽게 만들어주는 외부 패키지
 * pip을 통해 requests 패키지를 설치
 터미널에 입력 : $ pip install requests
+python requests 검색 후 공식 문서를 먼저 확인하자..!
 
 **패키지 사용 목적**
 * 모듈들의 이름공간을 구분하여 충돌을 방지
