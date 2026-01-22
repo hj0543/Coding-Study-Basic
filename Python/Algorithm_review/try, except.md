@@ -110,11 +110,11 @@ except:는 모든 예외를 잡음 → 버그도 같이 숨김 (좋은 습관은
 
 👉 입력이 더 이상 없으면 `EOFError`가 발생 → `except`로 잡고 종료.
 
-## 6. 백준에서 자주 쓰는 패턴 (EOF 처리)
+## 6. 그대로 출력하기
 ```python
 try:
     while True:
-        A, B = map(int, input().split())
+        print(input())
 except EOFError:
     pass
 ```
