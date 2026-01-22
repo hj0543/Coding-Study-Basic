@@ -96,8 +96,38 @@ while True:
     except:
         break
 ```
+* 입력을 받고 A+B를 출력
+
+* 예외가 발생하면 반복문을 종료 (break)
+
+* 예외 처리가 while 안에 있음
+
+⚠️ 단점:
+
+except:는 모든 예외를 잡음 → 버그도 같이 숨김 (좋은 습관은 아님)
+
+
 
 👉 입력이 더 이상 없으면 `EOFError`가 발생 → `except`로 잡고 종료.
+
+## 6. 백준에서 자주 쓰는 패턴 (EOF 처리)
+```python
+try:
+    while True:
+        A, B = map(int, input().split())
+except EOFError:
+    pass
+```
+* 입력만 받고 아무 출력도 하지 않음
+
+* EOFError가 나면 조용히 종료 (pass)
+
+* 예외 처리가 while 바깥에 있음
+
+⚠️ 문제점:
+
+숫자 개수가 부족하거나 형식이 잘못되면 ValueError가 발생 → 프로그램이 종료됨 (잡히지 않음)
+
 
 ---
 
