@@ -1,4 +1,4 @@
-## 2) `join()` : 문자열들을 “구분자”로 이어붙여 하나의 문자열로 만들기
+## 1) `join()` : 문자열들을 “구분자”로 이어붙여 하나의 문자열로 만들기
 
 ### 기본 형태
 
@@ -57,7 +57,7 @@ print(" ".join(map(str, ans)))
 
 ---
 
-## 3) `print`로 하나씩 찍는 것 vs `join`으로 한 번에 찍는 것
+## 2) `print`로 하나씩 찍는 것 vs `join`으로 한 번에 찍는 것
 
 ### 하나씩 출력 (끝 공백 처리 귀찮음)
 
@@ -80,41 +80,12 @@ print(" ".join(ans))
 
 ---
 
-## 4) 자주 나오는 실수 모음
+## 3) 자주 나오는 실수 모음
 
-### (1) `append` 결과를 변수에 다시 담기
 
-```python
-ans = ans.append("3")  # ans가 None이 됨 (오류 유발)
-```
-
-### (2) 정수 리스트를 join하기
+### (1) 정수 리스트를 join하기
 
 ```python
 ans = [1, 2, 3]
 print(" ".join(ans))  # TypeError
-```
-
-### (3) append와 extend 헷갈림
-
-```python
-ans.append([1,2])  # 원소가 리스트로 들어감
-```
-
-원한 게 `[1,2]`를 “펼쳐서” 넣는 거면 `extend`가 맞습니다.
-
----
-
-## 5) 10871에 딱 맞는 사용 예시
-
-```python
-N, X = map(int, input().split())
-A = list(map(int, input().split()))
-
-ans = []
-for v in A:
-    if v < X:
-        ans.append(str(v))   # append로 문자열 저장
-
-print(" ".join(ans))         # join으로 한 번에 출력
 ```
