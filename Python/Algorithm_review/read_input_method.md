@@ -61,7 +61,21 @@ N = int(input())
 for i in range(1, N+1):
     nums = int(input())
 ```
-
+## +a 'N'줄 갯수가 정해진 경우(세로)
+nums = []
+### 입력 예시
+```
+10
+10
+20
+30
+40
+```
+### 코드
+```python
+for _ in range(5):   # 입력 개수가 5개일 때
+    nums.append(int(input()))
+```
 ---
 
 ## 3) 첫 줄에 `N X`, 둘째 줄에 `N개` 정수(백준 10871 스타일)
