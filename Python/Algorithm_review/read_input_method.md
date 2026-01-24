@@ -33,7 +33,9 @@ A = list(map(int, input().split()))
 ```python
 numbers = list(map(int, input().split(',')))
 ```
-
+```python
+a, b, c = map(int, input().split(','))
+```
 ---
 
 ## 2) 첫 줄에 `N`, 다음 `N줄`에 정수 1개씩(세로)
