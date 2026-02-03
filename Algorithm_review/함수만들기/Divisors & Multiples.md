@@ -5,7 +5,7 @@
 
 
 
-
+### 약수
 ```python
 def get_divisors(n):
     divisors = []
@@ -16,3 +16,13 @@ def get_divisors(n):
                 divisors.append(n // i)
     return sorted(divisors)
 ```
+### 배수
+
+
+
+
+### 최대공약수
+
+
+
+### 최소공배수

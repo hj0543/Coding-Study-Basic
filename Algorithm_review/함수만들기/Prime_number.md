@@ -17,13 +17,13 @@
 
 
 
+### n 이하의 소수
 
 
 
 
 
-
-#====================소수의 개수========================
+### n이하의 소수의 개수
 ```python
 def count_primes(n):
     if n < 2:
@@ -40,7 +40,4 @@ def count_primes(n):
             
     # True인 개수를 카운트
     return sum(sieve)
-
-# 사용 예시: 100 이하의 소수 개수
-print(count_primes(100)) # 25
 ```
