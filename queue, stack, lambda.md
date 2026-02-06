@@ -44,7 +44,31 @@ q.rotate(-2)  # 왼쪽으로 2칸 회전
 words.sort(key=lambda x: (len(x), x))
 
 ```
+### 백준 10814
+```python
+import sys
+input = sys.stdin.readline
 
+N = int(input())
+#21 Junkyu
+# 21 Dohyun
+# 20 Sunyoung
+
+members = []
+
+for _ in range(N):
+    age, name = input().split()
+    members.append([int(age), name])
+
+members.sort(key=lambda x: (x[0]))
+
+for member in members:
+    print(*member)
+    
+# 20 Sunyoung
+# 21 Junkyu
+# 21 Dohyun
+```
 #### 원리 이해 (백준 1181번)
 
 파이썬은 튜플을 비교할 때 **앞에서부터 순차적으로** 비교한다.
