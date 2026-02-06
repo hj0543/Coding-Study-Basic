@@ -1,4 +1,4 @@
-### 팩토리얼(Factorial) - 순열
+### 팩토리얼(Factorial)
 ```python
 def factorial(n):
     if n <= 1:
