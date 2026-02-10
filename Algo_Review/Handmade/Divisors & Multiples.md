@@ -22,7 +22,13 @@ def get_divisors(n):
 
 
 ### 최대공약수
+```python
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
-
+print(gcd(60, 48)) # 출력: 12
+```
 
 ### 최소공배수
