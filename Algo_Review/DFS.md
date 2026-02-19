@@ -45,18 +45,25 @@ def dfs(v):
     print(v, end=' ')
     
     # 2. 인접 노드 탐색
+    # graph[v]는 v와 연결된 노드들의 리스트
     for w in graph[v]:
         # 3. 방문하지 않은 곳이라면 깊게 들어감(재귀)
         if not visited[w]:
             dfs(w)
 
 # --- 입력 처리 ---
+# 예시 입력: 정점 7개, 간선 8개
+# 7 8
+# 1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
 V, E = map(int, input().split())  # V: 정점, E: 간선
-graph = [[] for _ in range(V + 1)] # 인접 리스트 (0번 인덱스 미사용)
-visited = [False] * (V + 1)        # 방문 체크 리스트
+
+# 인접 리스트 (0번 인덱스 미사용, 1~V번 사용)
+graph = [[] for _ in range(V + 1)] 
+
+# 방문 체크 리스트 (False로 초기화)
+visited = [False] * (V + 1)        
 
 # 간선 정보 입력 (일렬로 들어오는 경우)
-# 예: 1 2 1 3 2 4 ...
 temp = list(map(int, input().split()))
 
 for i in range(E):
@@ -64,8 +71,14 @@ for i in range(E):
     graph[s].append(e)
     graph[e].append(s) # 양방향 연결!
 
+# [중요 2] 방문 순서 정렬 (오름차순)
+# "번호가 작은 노드부터 방문하시오"라는 조건이 많음.
+# 입력 순서에 따라 방문 순서가 뒤죽박죽 되는 것을 방지.
+for i in range(1, V + 1):
+    graph[i].sort()
+
 # --- 실행 ---
-print("DFS 탐색 경로:")
+print("DFS 탐색 경로: ", end="")
 dfs(1) # 1번 정점부터 시작
 
 ```
