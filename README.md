@@ -1,5 +1,5 @@
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=3572A5&background=00000000&center=false&vCenter=false&width=435&lines=Code+Haneul's+TIL;Just+Keep+Going!;Prove+Yourself!" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=3572A5&background=00000000&center=false&vCenter=false&width=435&lines=Haneul's+TIL;Just+Keep+Going!;Prove+Yourself!" alt="Typing SVG" />
 </a>
 
 ## 📝 Study Rule & Convention
@@ -9,7 +9,7 @@
 <br/>
 
 ## 📚 Main Tech Stack
-[![My Skills](https://skillicons.dev/icons?i=py&theme=light)](https://skillicons.dev) 
+[![My Skills](https://skillicons.dev/icons?i=py,html,css,js,bootstrap,java&theme=light)](https://skillicons.dev) 
 
 <br/>
 
@@ -25,9 +25,4 @@
  ┣ 📂 Java              # 자바 학습 내용
 ```
 ---
-### 목록
-[VSCODE short-cuts](https://github.com/hj0543/TIL/tree/main/VSCode-Shortcuts)
-* [Python](https://github.com/hj0543/TIL/tree/main/Python)
-* [JAVA](https://github.com/hj0543/TIL/tree/main/Java)
-* [Github](https://github.com/hj0543/TIL/tree/main/Github)
-* [CS](https://github.com/hj0543/TIL/tree/main/CS)
+
