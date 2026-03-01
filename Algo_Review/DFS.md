@@ -69,12 +69,12 @@ visited = [False] * (V + 1)
 
 # 3. 간선 정보 입력 (한 줄로 들어오는 경우)
 # 예: 1 2 1 3 2 4 ...
-edge_data = list(map(int, input().split()))
+temp = list(map(int, input().split()))
 
 # 4. 그래프 구성 (인접 리스트 생성)
 for i in range(E):
-    s = edge_data[2 * i]     # 시작점
-    e = edge_data[2 * i + 1] # 도착점
+    s = temp[2 * i]     # 시작점
+    e = temp[2 * i + 1] # 도착점
     
     graph[s].append(e)
     graph[e].append(s) # 양방향 연결
@@ -185,4 +185,110 @@ def dfs(G_lst, v):
 2. **인덱스 매핑:** 입력값 파싱 시 `temp` 리스트에서 `2*i`, `2*i+1` 처럼 인덱스를 조절하여 `(start, end)` 쌍을 가져오는 테크닉이 유용했다.
 3. **시스템 스택:** 재귀를 쓰면 컴퓨터 내부의 스택(Stack) 메모리를 사용한다. 따라서 별도의 스택 자료구조를 `push/pop` 하는 코드를 짤 필요 없이 코드가 간결해진다.
 4. **RecursionError:** 파이썬은 재귀 깊이 제한이 타이트하므로, 노드가 많은 그래프 문제에서는 `sys.setrecursionlimit()` 설정이 필수다.
+
+
+## 6. 문제별 적용법
+
+DFS는 단순히 "방문 순서"를 출력하는 것 외에도, 문제의 요구사항에 따라 코드의 **호출 위치**나 **매개변수**가 조금씩 달라진다.
+
+가장 자주 나오는 **3가지 대표 유형**으로 수정된 코드다.
+
+### 1. 연결 요소의 개수 구하기 (Connected Components)
+
+**문제 유형:** "연결된 덩어리(네트워크)가 총 몇 개인가?" (예: 섬의 개수, 바이러스가 퍼진 그룹의 수)
+**핵심 변경:** 시작점 `1`에서만 `dfs`를 부르는 게 아니라, **모든 정점을 돌면서 방문 안 한 곳이 보이면 새로 `dfs`를 시작**하고 카운트를 센다.
+
+```python
+# 함수 내부는 기존과 거의 동일 (단, 출력 대신 탐색만 수행)
+def dfs(v):
+    visited[v] = True
+    for w in graph[v]:
+        if not visited[w]:
+            dfs(w)
+
+# --- 메인 실행부 변경 ---
+count = 0  # 덩어리 개수
+
+# 1번 노드부터 V번 노드까지 모두 확인
+for i in range(1, V + 1):
+    if not visited[i]:  # 아직 방문 안 했다면? 새로운 덩어리 발견!
+        dfs(i)
+        count += 1      # 덩어리 개수 증가
+
+print(f"연결된 요소(덩어리)의 개수: {count}")
+
+```
+
+---
+
+### 2. 각 노드의 깊이(Depth) 계산하기
+
+**문제 유형:** "루트 노드(시작점)로부터 몇 단계 떨어져 있는가?" (예: 촌수 계산, 트리 높이 구하기)
+**핵심 변경:** 함수 매개변수에 `depth`를 추가하여, 재귀를 호출할 때마다 **depth + 1**을 넘겨준다.
+
+```python
+# depths 리스트: 각 노드의 깊이를 저장 (초기값 -1)
+depths = [-1] * (V + 1)
+
+# 매개변수에 cnt(현재 깊이) 추가
+def dfs(v, cnt):
+    visited[v] = True
+    depths[v] = cnt  # 현재 노드의 깊이 기록
+    
+    for w in graph[v]:
+        if not visited[w]:
+            # 다음 노드로 갈 때 깊이를 1 증가시켜서 전달
+            dfs(w, cnt + 1)
+
+# --- 메인 실행부 ---
+# 1번 노드에서 시작하고, 시작 깊이는 0
+dfs(1, 0)
+
+# 결과 확인 (예: 1번 노드와의 거리)
+print(f"각 노드의 깊이: {depths[1:]}")
+
+```
+
+---
+
+### 3. 특정 노드까지 가는 경로 찾기 (Path Finding)
+
+**문제 유형:** "A에서 B까지 가는 경로를 출력하시오." (단순 도달 가능 여부가 아닌 과정 기록)
+**핵심 변경:** 방문한 노드를 리스트(`path`)에 담았다가, 목적지에 도착하면 출력한다. (백트래킹 개념이 약간 섞임)
+
+```python
+target = 7       # 목표 지점
+path = []        # 경로를 담을 리스트
+found = False    # 찾았는지 확인하는 플래그
+
+def dfs(v):
+    global found
+    visited[v] = True
+    path.append(v)  # 경로에 현재 노드 추가
+    
+    if v == target: # 목표에 도착했으면
+        print(f"목표 {target}까지의 경로: {path}")
+        found = True
+        return
+
+    for w in graph[v]:
+        if not visited[w]:
+            dfs(w)
+            if found: return # 찾았으면 더 이상 탐색 X (종료)
+
+    # (선택) 만약 다른 경로도 모두 탐색해야 한다면 여기서 path.pop() 필요
+
+# --- 메인 실행부 ---
+dfs(1)
+
+```
+
+### 요약: 어디를 바꿔야 할까?
+
+| 문제 유형 | 바꿔야 할 부분 | 핵심 키워드 |
+| --- | --- | --- |
+| **방문 순서** | `dfs` 함수 내부 | `print(v)` 찍기 |
+| **덩어리 개수** | **`for`문 반복 호출** (메인 로직) | `if not visited[i]: count += 1` |
+| **거리/깊이** | **매개변수 추가** | `dfs(next_node, depth + 1)` |
+| **경로 찾기** | **리스트 `append**` | 도착 시 `return` |
 
