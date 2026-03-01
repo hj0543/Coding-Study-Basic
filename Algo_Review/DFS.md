@@ -36,55 +36,57 @@ adj = [[] for _ in range(V + 1)]
 
 ```python
 import sys
-# 재귀 깊이 제한 해제 (Python 기본 1000 -> 1,000,000)
+
+# 1. 재귀 깊이 제한 해제
 sys.setrecursionlimit(10**6)
 
 def dfs(v):
-    # 1. 방문 처리 (입장 도장)
+    """
+    깊이 우선 탐색 (DFS)
+    :param v: 현재 진입하는 정점 번호
+    """
+    # [1] 방문 처리
     visited[v] = True
     print(v, end=' ')
     
-    # 2. 인접 노드 탐색
-    # graph[v]는 v와 연결된 노드들의 리스트
+    # [2] 연결된 노드 탐색
     for w in graph[v]:
-        # 3. 방문하지 않은 곳이라면 깊게 들어감(재귀)
+        # [3] 방문 안 한 곳만 재귀 호출
         if not visited[w]:
             dfs(w)
 
-# --- 입력 처리 ---
-# 예시 입력: 정점 7개, 간선 8개
-# 7 8
-# 1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
-V, E = map(int, input().split())  # V: 정점, E: 간선
+# --- 메인 실행부 ---
 
-# 인접 리스트 (0번 인덱스 미사용, 1~V번 사용)
-graph = [[] for _ in range(V + 1)] 
+# 입력 속도 향상을 위해 sys.stdin.readline 사용
+input = sys.stdin.readline
 
-# 방문 체크 리스트 (False로 초기화)
-visited = [False] * (V + 1)        
+# 1. 정점(V)과 간선(E) 개수 입력
+V, E = map(int, input().split())
 
-# 간선 정보 입력 (일렬로 들어오는 경우)
-temp = list(map(int, input().split()))
+# 2. 그래프 및 방문 리스트 초기화 (1번 인덱스부터 사용)
+graph = [[] for _ in range(V + 1)]
+visited = [False] * (V + 1)
 
+# 3. 간선 정보 입력 (한 줄로 들어오는 경우)
+# 예: 1 2 1 3 2 4 ...
+edge_data = list(map(int, input().split()))
+
+# 4. 그래프 구성 (인접 리스트 생성)
 for i in range(E):
-    s, e = temp[2*i], temp[2*i+1] # 두 개씩 끊어서 읽기
-    # u, v = map(int, input().split()) -> 한 줄에 2개씩 들어올 때
-    graph[s].append(e)
-    graph[e].append(s) # 양방향 연결!
+    s = edge_data[2 * i]     # 시작점
+    e = edge_data[2 * i + 1] # 도착점
     
-    # 그래프에 연결 정보 추가
-    graph[u].append(v)
-    graph[v].append(u) # 양방향일 경우만 추가
-# [중요 2] 방문 순서 정렬 (오름차순)
-# "번호가 작은 노드부터 방문하시오"라는 조건이 많음.
-# 입력 순서에 따라 방문 순서가 뒤죽박죽 되는 것을 방지.
+    graph[s].append(e)
+    graph[e].append(s) # 양방향 연결
+
+# 5. 오름차순 정렬 (작은 번호부터 방문하기 위함)
 for i in range(1, V + 1):
     graph[i].sort()
 
-# --- 실행 ---
-print("DFS 탐색 경로: ", end="")
-dfs(1) # 1번 정점부터 시작
-
+# 6. DFS 실행 (시작 정점: 1)
+print(f"DFS 탐색 경로: ", end="")
+dfs(1)
+print() # 줄바꿈
 ```
 ### 코드 구조 분석
 
