@@ -140,5 +140,3 @@ for _ in range(m):
 topology_sort()
 
 ```
-
-일반 큐(Queue) 대신 **우선순위 큐(Priority Queue, heapq)**를 사용하는 응용 문제(예: 백준 1766번 '문제집')에 대한 풀이법도 연달아 설명해 드릴까요?
