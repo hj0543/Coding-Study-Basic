@@ -98,32 +98,45 @@ input = sys.stdin.readline
 from collections import deque
 
 def topology_sort():
-    result = []
-    q = deque()
+    result = [] # 위상 정렬 수행 결과를 담을 리스트 (순서대로 노드 번호가 들어감)
+    q = deque() # 진입차수가 0인 노드들을 대기시킬 큐
 
+    # 1. 초기 세팅: 처음부터 진입차수가 0인(선수 조건이 없는) 노드들을 큐에 모두 넣음
     for i in range(1, n + 1):
         if indegree[i] == 0:
             q.append(i)
 
+    # 2. 큐가 빌 때까지 반복 (위상 정렬의 핵심 사이클)
     while q:
-        now = q.popleft()
-        result.append(now)
+        now = q.popleft()  # 큐에서 노드를 하나 꺼냄 (현재 실행할 작업)
+        result.append(now) # 실행한 작업을 결과 리스트에 순서대로 기록
 
+        # 꺼낸 노드(now)와 연결된 다음 단계의 노드(i)들을 하나씩 확인
         for i in graph[now]:
-            indegree[i] -= 1
+            indegree[i] -= 1 # 방금 now 작업을 끝냈으므로, 다음 작업(i)의 선수 조건 개수를 1개 줄임
+            
+            # 선수 조건이 모두 해결되어 진입차수가 0이 되었다면 큐에 새롭게 대기시킴
             if indegree[i] == 0:
                 q.append(i)
+                
+    # 3. 위상 정렬 결과 출력 (리스트의 요소들을 띄어쓰기로 구분하여 한 줄로 출력)
     print(*result)
 
+# 노드의 개수(n)와 간선의 개수(m) 입력받기
 n, m = map(int, input().split())
+
+# 모든 노드에 대한 진입차수는 0으로 초기화
 indegree = [0] * (n + 1)
+# 각 노드에서 출발하는 간선 정보를 담기 위한 인접 리스트 초기화
 graph = [[] for _ in range(n + 1)]
 
+# 방향 그래프의 모든 간선(조건) 정보 입력받기
 for _ in range(m):
     s, e = map(int, input().split())
-    graph[s].append(e)
-    indegree[e] += 1    # 이걸 빼먹음;;
+    graph[s].append(e) # 노드 s를 끝내야 노드 e를 할 수 있음 (s -> e)
+    indegree[e] += 1   # 도착점인 노드 e의 진입차수를 1 증가 (기다려야 할 조건 +1)
 
+# 위상 정렬 함수 실행
 topology_sort()
 
 ```
