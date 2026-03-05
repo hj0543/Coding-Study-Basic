@@ -51,7 +51,7 @@ def backtracking(depth):
 import sys
 input = sys.stdin.readline
 
-def solve(depth):
+def backtracking(depth):
     # 목표한 길이(m)만큼 숫자를 뽑았다면 결과 출력 (종료 조건)
     if depth == m:
         print(*result)
