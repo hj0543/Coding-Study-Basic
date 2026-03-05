@@ -58,12 +58,7 @@ def topology_sort():
                 q.append(i)
 
     # 사이클 발생 여부 확인 (결과 리스트의 길이가 전체 노드 개수와 다르면 사이클 존재)
-    if len(result) != v:
-        print("사이클이 존재하여 위상 정렬을 완료할 수 없습니다.")
-    else:
-        # 위상 정렬 수행 결과 출력
-        for i in result:
-            print(i, end=' ')
+    print(*result)
 
 topology_sort()
 
