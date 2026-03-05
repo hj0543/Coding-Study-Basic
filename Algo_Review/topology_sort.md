@@ -27,9 +27,6 @@ indegree = [0] * (v + 1)
 # 각 노드에 연결된 간선 정보를 담기 위한 인접 리스트 초기화
 graph = [[] for _ in range(v + 1)]
 
-# 방향 그래프의 간선 정보 (A -> B) 예시 데이터
-graph = [[] for _ in range(n + 1)]
-
 for _ in range(m):
     s, e = map(int, input().split())
     graph[s].append(e)    # 정점 A에서 B로 이동 가능
