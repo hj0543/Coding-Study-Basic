@@ -64,7 +64,7 @@ def backtracking(depth):
             visited[i] = True  # 방문 표시 (숫자 사용)
             result.append(i)   # 결과 리스트에 추가
 
-            solve(depth + 1)   # 다음 숫자 뽑으러 가기 (재귀 호출)
+            backtracking(depth + 1)   # 다음 숫자 뽑으러 가기 (재귀 호출)
 
             # --- 이 시점이 '되돌아온(Backtrack)' 시점 ---
             result.pop()       # 마지막에 넣었던 숫자 제거
@@ -76,7 +76,7 @@ n, m = map(int, input().split())
 visited = [False] * (n + 1) # 숫자 사용 여부 체크
 result = []                 # 현재까지 만든 수열
 
-solve(0)
+backtracking(0)
 
 ```
 
