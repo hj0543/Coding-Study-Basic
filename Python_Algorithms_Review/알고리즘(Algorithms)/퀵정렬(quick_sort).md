@@ -169,5 +169,5 @@ def quick_sort(left, right):
 
 
 quick_sort(0, len(arr) - 1)
-```
 print(arr)
+```
