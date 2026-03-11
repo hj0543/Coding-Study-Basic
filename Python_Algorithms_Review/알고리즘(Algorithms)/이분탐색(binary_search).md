@@ -22,15 +22,15 @@
 
 ```python
 # 이분 탐색 함수 (반복문 구현)
-def binary_search(array, target, start, end):
+def binary_search(arr, target, start, end):
     while start <= end:
         mid = (start + end) // 2
         
         # 1. 찾은 경우 중간점 인덱스 반환
-        if array[mid] == target:
+        if arr[mid] == target:
             return mid
         # 2. 중간점의 값보다 찾고자 하는 값이 작은 경우 왼쪽 확인
-        elif array[mid] > target:
+        elif arr[mid] > target:
             end = mid - 1
         # 3. 중간점의 값보다 찾고자 하는 값이 큰 경우 오른쪽 확인
         else:
@@ -42,10 +42,10 @@ def binary_search(array, target, start, end):
 # n(원소의 개수)과 target(찾고자 하는 값)
 n, target = 10, 7
 # 전체 원소 입력받기 (미리 정렬되어 있다고 가정)
-array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 
 # 이분 탐색 수행 결과 출력
-result = binary_search(array, target, 0, n - 1)
+result = binary_search(arr, target, 0, n - 1)
 if result == None:
     print("원소가 존재하지 않습니다.")
 else:
@@ -84,13 +84,13 @@ $N$개의 정수 $A[1], A[2], \dots, A[N]$이 주어져 있을 때, 이 안에 $
 import sys
 input = sys.stdin.readline
 
-def binary_search(array, target, start, end):
+def binary_search(arr, target, start, end):
     while start <= end:
         mid = (start + end) // 2
         
-        if array[mid] == target:
+        if arr[mid] == target:
             return 1 # 존재하면 1 반환
-        elif array[mid] > target:
+        elif arr[mid] > target:
             end = mid - 1
         else:
             start = mid + 1
