@@ -15,41 +15,50 @@
 파이썬의 리스트 슬라이싱을 활용하면 코드가 매우 직관적이고 우아해진다. 분할하는 함수와 병합하는 로직을 하나로 합친 가장 스탠다드한 코드다.
 
 ```python
+def merge(left_list, right_list):
+    """
+    두 개의 정렬된 리스트를 받아서 하나로 합치는 함수
+    """
+    merged = []
+    left = 0
+    right = 0
+    
+    # 양쪽 리스트에 원소가 남아있는 동안 비교하며 병합
+    while left < len(left_list) and right < len(right_list):
+        if left_list[left] < right_list[right]:
+            merged.append(left_list[left])
+            left += 1
+        else:
+            merged.append(right_list[right])
+            right += 1
+            
+    # 한쪽 리스트가 먼저 소모된 경우, 남은 원소들을 뒤에 붙임
+    merged += left_list[left:]
+    merged += right_list[right:]
+    
+    return merged
+
 def merge_sort(arr):
-    # 기저 조건: 배열의 길이가 1 이하라면 이미 정렬된 것이므로 그대로 반환한다.
+    """
+    재귀적으로 배열을 분할한 뒤 merge 함수를 호출하는 메인 함수
+    """
+    # 기저 조건: 길이가 1 이하면 이미 정렬된 상태
     if len(arr) <= 1:
         return arr
         
     # 1. 분할 (Divide)
     mid = len(arr) // 2
-    left = merge_sort(arr[:mid])  # 왼쪽 절반을 다시 병합 정렬 (재귀)
-    right = merge_sort(arr[mid:]) # 오른쪽 절반을 다시 병합 정렬 (재귀)
+    left_half = merge_sort(arr[:mid])
+    right_half = merge_sort(arr[mid:])
     
-    # 2. 병합 (Merge)
-    merged = []
-    l = 0 # 왼쪽 배열의 포인터(인덱스)
-    r = 0 # 오른쪽 배열의 포인터(인덱스)
-    
-    # 양쪽 배열 모두 원소가 남아있는 동안, 맨 앞의 값을 비교해서 작은 것을 꺼내 넣는다.
-    while l < len(left) and r < len(right):
-        if left[l] < right[r]:
-            merged.append(left[l])
-            l += 1
-        else:
-            merged.append(right[r])
-            r += 1
-            
-    # 3. 남은 원소들 털어넣기
-    # 한쪽 배열이 먼저 비었을 경우, 남은 쪽의 원소들을 전부 뒤에 그대로 이어 붙인다.
-    merged += left[l:]
-    merged += right[r:]
-    
-    return merged
+    # 2. 병합 (Merge) - 분리된 merge 함수 호출
+    return merge(left_half, right_half)
 
 # 테스트
 arr = [38, 27, 43, 3, 9, 82, 10]
-print("병합 정렬 결과:", merge_sort(arr))
-# 결과: [3, 9, 10, 27, 38, 43, 82]
+result = merge_sort(arr)
+print(f"정렬 전: {arr}")
+print(f"정렬 후: {result}")
 
 ```
 
