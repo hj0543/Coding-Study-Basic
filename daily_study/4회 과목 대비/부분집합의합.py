@@ -8,7 +8,6 @@ def dfs_subset(idx, subset):
     if idx == 12:
         if len(subset) == N and sum(subset) == K:
             result += 1
-        print(subset)
         return
 
     # 현재 원소를 포함하는 경우
